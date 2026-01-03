@@ -18,8 +18,8 @@
             text-align: center;
         }
         .flag {
-            width: 66.67%;
-            max-width: 533px;
+            width: 66.67%; /* 2/3 of the progress bar width */
+            max-width: 533px; /* 2/3 of 800px max */
             margin-bottom: 2rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
             border-radius: 8px;
@@ -55,15 +55,10 @@
             font-size: 1.5rem;
             text-shadow: 0 1px 5px rgba(0,0,0,0.5);
         }
-        .details-group {
-            margin-top: 2.5rem;
-            font-size: 1.4rem;
-            line-height: 2.2;
-            opacity: 0.95;
-        }
-        .details-group strong {
-            font-size: 1.8rem;
-            font-weight: 600;
+        .details {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -71,21 +66,15 @@
     <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1280px-Flag_of_the_United_States.svg.png" alt="United States Flag" class="flag">
 
     <h1>Path to US Citizenship</h1>
-    <p class="info">Green Card received: January 28, 2024</p>
+    <p class="info">Permanent Resident since January 28, 2024</p>
     <div class="progress-container">
         <div class="progress-bar" id="bar">0%</div>
     </div>
-
-    <div class="details-group" id="details">
-        Permanent Resident since January 28, 2024<br>
-        • <strong id="daysPassed">0</strong> days passed<br>
-        • <strong id="daysLeft">0</strong> days remaining until eligible on <span id="eligibleDate">January 28, 2029</span>
-    </div>
+    <p class="details" id="details"></p>
 
     <script>
         const greenCardDate = new Date('2024-01-28');
-        // Standard 5-year rule minus 1 day for exact eligibility (eligible after 5 full years)
-        const eligibleDate = new Date('2029-01-27');
+        const eligibleDate = new Date('2029-01-28'); // 5-year rule
 
         function updateProgress() {
             const now = new Date();
@@ -98,15 +87,15 @@
             bar.textContent = percentage.toFixed(1) + '%';
 
             const daysPassed = Math.floor(passedMs / (1000 * 60 * 60 * 24));
-            const daysLeft = Math.ceil((eligibleDate - now) / (1000 * 60 * 60 * 24));
+            const daysTotal = Math.floor(totalMs / (1000 * 60 * 60 * 24));
+            const daysLeft = daysTotal - daysPassed;
 
-            document.getElementById('daysPassed').textContent = daysPassed.toLocaleString();
-            document.getElementById('daysLeft').textContent = daysLeft.toLocaleString();
-            document.getElementById('eligibleDate').textContent = eligibleDate.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'});
+            document.getElementById('details').textContent = 
+                `${daysPassed} days passed • ${daysLeft} days remaining until eligible on ${eligibleDate.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}`;
         }
 
         updateProgress();
-        setInterval(updateProgress, 60000); // Update every minute
+        setInterval(updateProgress, 60000);
     </script>
 </body>
 </html>
