@@ -84,7 +84,7 @@
 
             const bar = document.getElementById('bar');
             bar.style.width = percentage + '%';
-            bar.textContent = percentage.toFixed(6) + '%';
+            bar.textContent = percentage.toFixed(5) + '%';
 
             const daysPassed = Math.floor(passedMs / (1000 * 60 * 60 * 24));
             const daysTotal = Math.floor(totalMs / (1000 * 60 * 60 * 24));
