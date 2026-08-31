@@ -103,13 +103,15 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
 
-            const starCount = Math.floor((canvas.width * canvas.height) / 2500);
+            const starCount = Math.floor((canvas.width * canvas.height) / 1200);
             for (let i = 0; i < starCount; i++) {
                 const x = Math.random() * canvas.width;
                 const y = Math.random() * canvas.height;
-                const r = Math.random() * 1.2 + 0.3;
-                const alpha = Math.random() * 0.35 + 0.15;
-                ctx.fillStyle = `rgba(0, 20, 70, ${alpha})`;
+                const r = Math.random() * 1.5 + 0.5;
+                const alpha = Math.random() * 0.7 + 0.3;
+                const brightness = Math.random();
+                const color = brightness > 0.8 ? '255, 255, 255' : '180, 200, 255';
+                ctx.fillStyle = `rgba(${color}, ${alpha})`;
                 ctx.beginPath();
                 ctx.arc(x, y, r, 0, Math.PI * 2);
                 ctx.fill();
