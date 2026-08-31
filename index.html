@@ -108,9 +108,9 @@
                 const x = Math.random() * canvas.width;
                 const y = Math.random() * canvas.height;
                 const r = Math.random() * 1.5 + 0.5;
-                const alpha = Math.random() * 0.7 + 0.3;
+                const alpha = Math.random() * 0.5 + 0.2;
                 const brightness = Math.random();
-                const color = brightness > 0.8 ? '255, 255, 255' : '180, 200, 255';
+                const color = brightness > 0.8 ? '220, 230, 255' : '120, 150, 220';
                 ctx.fillStyle = `rgba(${color}, ${alpha})`;
                 ctx.beginPath();
                 ctx.arc(x, y, r, 0, Math.PI * 2);
